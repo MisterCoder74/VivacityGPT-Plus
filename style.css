@@ -1,0 +1,426 @@
+/* INIZIO STYLING DI BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  width: 100%;
+  height: 8rem;
+  background-color: #b575c5;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px black;
+}
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav .link {
+  width: 20rem;
+  text-align: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 1rem;
+  border: 2px solid black;
+  padding: 1rem 0;
+}
+nav .link:hover {
+  background: black;
+  border: 2px solid transparent;
+  color: #b575c5;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 0.5rem;
+  width: 100%;
+
+  background-color: #fff;
+  padding: 1rem 2rem;
+}
+article {
+  width: 40%;
+  height: 22rem;
+  padding: 1rem;
+  box-shadow: 0 2px 6px black;
+  border-radius: 1rem;
+}
+article ul {
+  margin-left: 2rem;
+}
+#setuppanel {
+  width: 40rem;
+  background: transparent;
+  border-radius: 1rem;
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px black;
+}
+#setuppanel summary {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+#setup {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+label {
+  color: #b575c5;
+  font-weight: bold;
+  margin: 0.5rem;
+}
+#apikeyfield01,
+#apikeyfield02 {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #b575c5;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px black;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 30rem;
+  transform: translate(-50%, -50%);
+  width: 66rem;
+  height: 48rem;
+  max-width: 1100px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid #b575c5;
+  box-shadow: 0 2px 4px black;
+}
+
+/* Modal content */
+.modal-content {
+  margin: 20px auto;
+  width: 95%;
+  height: 92%;
+  padding: 0.5rem;
+  display: block;
+  color: black;
+  border: 2px solid black;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* FINE STYLING DI BASE */
+
+/* INIZIO STYLING MODALE TXT CHAT E IMAGER */
+.userinput {
+  background-color: white;
+  padding: 10px 0;
+  z-index: 9999;
+  width: 100%;
+  height: 4rem;
+  box-shadow: 0 2px 4px black;
+  text-align: center;
+}
+.main {
+  margin: 10px auto;
+  border: 1px solid transparent;
+  width: 100%;
+  height: 82%;
+  display: flex;
+  background: transparent;
+}
+.menu {
+  width: 25%;
+  height: 100%;
+  padding: 20px 0.5rem;
+  border-right: 1px solid black;
+}
+.chathistory {
+  padding: 10px;
+  width: 75%;
+  height: 100%;
+  box-shadow: 0 2px 4px black;
+}
+
+#chat-container,
+#chat-containerIMG {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  width: 100%;
+  overflow-y: auto;
+  padding: 4px;
+  font-family: "Spectral", serif;
+}
+
+#user-input,
+#user-inputIMG {
+  font-size: 0.9rem;
+  color: black;
+  border-radius: 0px;
+  box-shadow: 0 2px 4px black;
+  padding: 6px;
+  width: 80%;
+  margin: 0 auto;
+}
+#search-input {
+  font-size: 0.9rem;
+  color: black;
+  border-radius: 0px;
+  box-shadow: 0 2px 4px black;
+  padding: 6px;
+  width: 100%;
+  margin: 0.5rem auto;
+}
+
+input[type="file"] {
+  background-color: #b575c5;
+  color: white;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-size: 0.7rem;
+  border-radius: 0px;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #b575c5;
+  border-radius: 0.75rem;
+  padding: 4px 8px;
+  border: 1px solid black;
+  cursor: pointer;
+  color: white;
+  font-size: 0.9rem;
+}
+
+button {
+  background-color: #b575c5;
+  color: white;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.fixedwidth {
+  width: 100%;
+  font-size: 0.9rem;
+  border-radius: 0.75rem;
+  background-color: #b575c5;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.fixedwidth:hover {
+  background-color: #b575c5;
+  color: black;
+}
+
+.menunotice {
+  width: 100%;
+  font-size: 0.9rem;
+  border-radius: 0.75rem;
+  background-color: #b575c5;
+  text-align: justify;
+  border: 1px solid black;
+  padding: 4px;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.btncopy {
+  background-color: #b575c5;
+  color: white;
+  cursor: pointer;
+  padding: 6px 14px;
+  margin: 4px 16px;
+  font-size: 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid black;
+  float: right;
+  align-self: end;
+}
+.btncopy:hover {
+  background-color: black;
+  color: #b575c5;
+}
+
+#search-button {
+  background-color: #b575c5;
+  color: white;
+  cursor: pointer;
+  padding: 6px 14px;
+  margin: 0 2px;
+  font-size: 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid black;
+}
+
+.preloader {
+  width: 48px;
+}
+
+#operations {
+  margin-top: 0.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#feedback {
+  font-size: 0.9rem;
+  color: black;
+  padding: 4px 6px;
+}
+
+/* scrollbars */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b575c5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b575c5;
+}
+/* FINE STYLING MODALE TXT CHAT */
+
+/* INIZIO STYLING COMUNE TXT CHATBOT E IMAGER */
+.message {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  border: 2px solid red;
+  font-family: Arial, sans-serif;
+}
+
+.user-message {
+  background-color: #42adf5;
+  padding: 10px 6px;
+  width: 70%;
+  justify-self: end;
+  align-self: end;
+  text-align: right;
+  border: 1px solid black;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 0;
+  margin-bottom: 4px;
+  line-height: 0.9;
+}
+
+.chatgpt-message {
+  background-color: #4271f5;
+  padding: 15px;
+  width: 100%;
+  justify-self: end;
+  align-self: start;
+  text-align: justify;
+  color: white;
+  font-size: 1.1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  line-height: 1;
+}
+/* INIZIO STYLING COMUNE TXT CHATBOT E IMAGER */
+
+/* INIZIO STYLING MODALE PDF CHAT */
+#pdfcommands {
+  width: 70%;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem auto;
+  box-shadow: 0 2px 4px black;
+}
+#questionInput {
+  font-size: 0.9rem;
+  color: black;
+  border-radius: 0px;
+  box-shadow: 0 2px 4px black;
+  padding: 6px;
+  width: 80%;
+  margin: 0.2rem auto;
+  background: #fff;
+}
+#responseDiv {
+  display: flex;
+  flex-direction: column;
+  height: 26rem;
+  width: 100%;
+  overflow-y: auto;
+  padding: 0.5rem;
+  font-family: "Spectral", serif;
+  border: 1px solid black;
+}
+#responseDiv p {
+  width: 100%;
+  background: #b575c5;
+  padding: 0.5rem;
+  text-align: justify;
+  margin: 2px auto;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  color: black;
+}
+
+#modal {
+  margin: 0 auto;
+  width: 24rem;
+  height: 10rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px black;
+  background: #b575c5;
+  padding: 1rem;
+}
+#modal input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-top: 8px;
+}
+#modal button {
+  margin-top: 1rem;
+  width: 6rem;
+  padding: 4px 8px;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+  color: #b575c5;
+  background: black;
+}
+/* FINE STYLING MODALE PDF CHAT */

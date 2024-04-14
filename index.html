@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>VivacityGPT - Complete TXT + IMG + PDF chatbot in Vanilla JS</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="link" onclick="openTXT()">Text Chatbot</div>
+      <div class="link" onclick="openIMG()">Image Generation</div>
+      <div class="link" onclick="openPDF()">PDF Chatbot</div>
+    </nav>
+  </header>
+
+  <main>
+    <details id="setuppanel" open>
+      <summary>Chatbots Setup</summary>
+      <div id="setup">
+        <label>OpenAI API Key:</label><small>Get your API Key <a href="https://platform.openai.com/apps"
+            target="_blank">here</a></small>
+        <input type="password" id="apikeyfield01" placeholder="Insert your OpenAI API Key here">
+
+        <label>ChatPDF API Key:</label><small>Get your API Key <a href="https://www.chatpdf.com/"
+            target="_blank">here</a></small>
+        <input type="password" id="apikeyfield02" placeholder="Insert your ChatPDF API Key here">
+      </div>
+    </details>
+
+    <article>
+      <h3>Project Description</h3>
+      This project by Vivacity Design Web Agency (2022-2024) offers a user-level chatbot based on OpenAI ChatGPT3.5 /
+      Dall-E 2 and ChatPDF technology that features:
+      <ul>
+        <li> simple chat</li>
+        <li> TXT upload and analysis with summarization and questioning</li>
+        <li> speech synthesis</li>
+        <li> chat export</li>
+        <li> chat search</li>
+        <li> answer copy</li>
+        <li> context memory</li>
+        <li> up to 17000 tokens (4096 outgoing in answers)</li>
+        <li> 12 personalities</li>
+        <li> image generation (512x512)</li>
+        <li> image export</li>
+        <li> PDF upload and analysis with summarization and questioning</li>
+      </ul>
+      <br>
+      <small>Needs OpenAI and ChatPDF API Keys<br>
+        Based on models: <code>chatgpt3.5-turbo-0125</code> and <code>dall-e-2</code></small>
+    </article>
+  </main>
+
+  <!-- The Modals -->
+  <!-- CHATBOT TXT CHATGPT + ANALYZER -->
+  <div id="openTXTmodal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeTXTmodal()">&times;</span>
+
+      <div class="userinput">
+        <input type="text" id="user-input" placeholder="Insert your prompt" autocomplete="off" autofocus
+          onkeydown="verifyEnter(event)" />
+        <button class="btncopy" onclick="sendMessage()">Send</button>
+      </div>
+      <section class="main">
+        <aside class="menu">
+          <details class="menunotice">
+            <summary>&#128195; TXT Analyzer</summary>
+            <div id="operations">
+              <form enctype="multipart/form-data" method="POST">
+                <input class="fixedwidth" type="file" accept=".txt" name="file" id="file-input">
+                <div id="feedback"></div>
+                <button class="fixedwidth" id="uploadBtn" type="submit"> Upload the file</button>
+                <button type="button" class="fixedwidth" onclick="analyzeFile();"> Analyze the file</button>
+              </form>
+            </div>
+          </details>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+            $(document).ready(function () {
+              $('#uploadBtn').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                  url: 'upload.php', // make sure you have the upload script in the folder
+                  type: 'POST',
+                  data: new FormData($('form')[0]),
+                  processData: false,
+                  contentType: false,
+                  success: function (response) {
+                    $('#feedback').html(response);
+                  }
+                });
+              });
+            });
+          </script>
+          <button class="fixedwidth" id="savetxt"> Export Chat </button>
+          <button class="fixedwidth"
+            onclick="responsiveVoice.speak(window.getSelection().toString(), 'English Female');" value="Play"> Repeat
+            text</button>
+          <hr>
+          <select class="fixedwidth" id="selectOption" style="padding: 6px 2px; cursor: pointer;">
+            <option selected>Select a personality</option>
+            <option>------ Programming ----</option>
+            <option value="01">Full Stack Web Developer</option>
+            <option value="02">.NET Developer</option>
+            <option value="03">Wordpress Master</option>
+            <option value="04">JS Frameworks Wizard</option>
+            <option value="05">Retrocomputing Master</option>
+            <option>------ Music and Cinema ----</option>
+            <option value="06">Rock and Metal fanatic</option>
+            <option value="07">Generic Music Expert</option>
+            <option value="08">Movie Expert</option>
+            <option value="09">TV Serials Expert</option>
+            <option>------ Other ----</option>
+            <option value="10">Multi Languages Translator</option>
+            <option value="11">Old English Poet</option>
+            <option value="12">Papa Smurf</option>
+          </select>
+          <br><input type="text" id="search-input" placeholder="Search in the chats..."><button id="search-button"
+            class="fixedwidth">Search</button>
+        </aside>
+        <section class="chathistory">
+          <div id="chat-container"></div>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- END CHATBOT TXT CHATGPT + ANALYZER -->
+
+  <!-- CHATBOT IMG DALL-E2 -->
+  <div id="openIMGmodal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeIMGmodal()">&times;</span>
+
+      <div class="userinput">
+        <input type="text" id="user-inputIMG" placeholder="Enter image description" autocomplete="off" autofocus
+          onkeydown="verifyEnterIMG(event)" />
+        <button class="btncopy" onclick="generateImage()">Send</button>
+      </div>
+      <section class="main">
+        <div class="chathistory">
+          <div id="chat-containerIMG"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- END CHATBOT IMG DALL-E2 -->
+
+  <!-- CHATBOT PDF CHATPDF -->
+  <div id="openPDFmodal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePDFmodal()">&times;</span>
+
+      <section id="pdfcommands">
+        <input type="file" id="pdfFileInput" class="fixedwidth"><small><i>Powered by <a href="https://www.chatpdf.com/"
+              target="_blank">ChatPDF</a></i></small><br>
+        <button onclick="uploadPDF()" class="fixedwidth">Upload PDF</button>
+        <button id="openModalLink" class="fixedwidth">Load from URL</button>
+        <button onclick="deletePDF()" class="fixedwidth">Delete PDF</button>
+        <p id="Feedback" style="display: none; color: green;"></p>
+      </section>
+      <section id="pdfmainchat">
+        <input type="text" id="questionInput" placeholder="Enter your question">
+        <button onclick="sendQuestion()" class="btncopy">Send Question</button>
+        <div id="responseDiv"></div>
+      </section>
+      <div id="modal" style="display: none;">
+        <input type="text" id="pdfURLInput" placeholder="Enter PDF URL"><br>
+        <button id="uploadButton">Upload</button>
+      </div>
+    </div>
+  </div>
+  <!-- END CHATBOT PDF CHATPDF -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#uploadBtn').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+          url: 'upload.php', // make sure you have the upload script in the folder
+          type: 'POST',
+          data: new FormData($('form')[0]),
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            $('#feedback').html(response);
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- SPEECH SYNTHESIS ITALIAN VOICE
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=yZtZhFyg">
+</script> -->
+  <!-- SPEECH SYNTHESIS ENGLISH VOICE -->
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=VjTd0d6G">
+  </script>
+
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
